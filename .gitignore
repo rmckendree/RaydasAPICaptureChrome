@@ -1,0 +1,16 @@
+# Exports from the extension can contain real tokens and cookies
+*.postman_collection.json
+api-capture-*.json
+*.bru
+bruno.json
+
+# Packaged builds and signing keys
+*.crx
+*.pem
+*.zip
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

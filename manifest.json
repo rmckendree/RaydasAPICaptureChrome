@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "API Capture → Postman/Bruno",
+  "version": "1.1.0",
+  "author": "Rayda Mckendree",
+  "description": "Captures network requests in DevTools and exports them as Postman, Bruno, or simple request/response JSON.",
+  "devtools_page": "devtools.html",
+  "permissions": []
+}

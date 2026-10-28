@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: sans-serif; font-size: 12px; margin: 0; padding: 8px; }
+  #toolbar { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; flex-wrap: wrap; }
+  #toolbar input[type="text"] { flex: 1; min-width: 160px; padding: 4px; }
+  button, select { padding: 4px 10px; cursor: pointer; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #ddd; padding: 4px 6px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px; }
+  th { background: #f4f4f4; position: sticky; top: 0; }
+  tr:hover { background: #f9f9f9; }
+  .status-ok { color: green; }
+  .status-err { color: #c00; }
+  #count { color: #666; }
+  tbody tr { cursor: pointer; }
+  tr.active { background: #e8f0fe; }
+  #layout { display: flex; gap: 8px; height: calc(100vh - 60px); }
+  #listPane { flex: 1; overflow: auto; min-width: 0; }
+  #detailPane { flex: 1; display: none; flex-direction: column; min-width: 0; border-left: 1px solid #ddd; padding-left: 8px; }
+  #detailPane.open { display: flex; }
+  #detailBar { display: flex; gap: 8px; margin-bottom: 4px; align-items: center; }
+  #detailJson { flex: 1; overflow: auto; margin: 0; background: #f7f7f7; padding: 6px; font-family: Consolas, monospace; font-size: 12px; white-space: pre-wrap; word-break: break-all; }
+</style>
+</head>
+<body>
+  <div id="toolbar">
+    <button id="clearBtn">Clear</button>
+    <label><input type="checkbox" id="pauseBtn"> Pause capture</label>
+    <input type="text" id="hostFilter" placeholder="Filter by host (e.g. api.example.com)">
+    <label><input type="checkbox" id="includeResponse"> Include response body</label>
+    <label><input type="checkbox" id="decodeChk" checked> Auto-decode</label>
+    <select id="exportFormat">
+      <option value="postman">Postman JSON</option>
+      <option value="bru">Bruno (.bru files)</option>
+      <option value="simple">Simple JSON (request + response)</option>
+    </select>
+    <button id="exportBtn">Export selected</button>
+    <button id="copyJsonBtn">Copy selected as JSON</button>
+    <button id="copyCurlBtn">Copy as cURL</button>
+    <span id="count">0 requests</span>
+  </div>
+  <div id="layout">
+    <div id="listPane">
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="selectAll"></th>
+            <th>Method</th>
+            <th>Status</th>
+            <th>Host</th>
+            <th>Path</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div id="detailPane">
+      <div id="detailBar">
+        <strong id="detailTitle"></strong>
+        <button id="detailCopyBtn">Copy JSON</button>
+        <button id="detailCloseBtn">Close</button>
+      </div>
+      <pre id="detailJson"></pre>
+    </div>
+  </div>
+  <script src="panel.js"></script>
+</body>
+</html>
